@@ -1,0 +1,43 @@
+[freeswitch-udp]
+enabled  = true
+port     = 5060:5090
+protocol = all
+filter   = freeswitch
+logpath  = /usr/local/freeswitch/log/freeswitch.log
+action   = iptables-multiport[name=freeswitch-udp, port="5060:5090", protocol=udp]
+maxretry = 5
+findtime = 600
+bantime  = 3600
+
+[freeswitch-tcp]
+enabled  = true
+port     = 5060:5090
+protocol = all
+filter   = freeswitch
+logpath  = /usr/local/freeswitch/log/freeswitch.log
+action   = iptables-multiport[name=freeswitch-tcp, port="5060:5090", protocol=tcp]
+maxretry = 5
+findtime = 600
+bantime  = 3600
+
+[freeswitch-ip-udp]
+enabled  = true
+port     = 5060:5090
+protocol = all
+filter   = freeswitch-ip
+logpath  = /usr/local/freeswitch/log/freeswitch.log
+action   = iptables-multiport[name=freeswitch-ip-udp, port="5060:5090", protocol=udp]
+maxretry = 5
+findtime = 600
+bantime  = 3600
+
+[freeswitch-ip-tcp]
+enabled  = true
+port     = 5060:5090
+protocol = all
+filter   = freeswitch-ip
+logpath  = /usr/local/freeswitch/log/freeswitch.log
+action   = iptables-multiport[name=freeswitch-ip-tcp, port="5060:5090", protocol=tcp]
+maxretry = 5
+findtime = 600
+bantime  = 3600
