@@ -51,7 +51,7 @@ apt-get update && apt-get upgrade -y --force-yes
 wget -O - https://files.freeswitch.org/repo/deb/debian/freeswitch_archive_g0.pub | apt-key add -
 echo "deb http://files.freeswitch.org/repo/deb/freeswitch-1.6/ jessie main" > /etc/apt/sources.list.d/freeswitch.list
 apt-get update
-apt-get install -y --force-yes freeswitch-video-deps-most
+apt-get install -y --force-yes freeswitch-video-deps-most ntp
 
 #Add Execute Permissions to other Scripts
 chmod +x resources/*.sh
