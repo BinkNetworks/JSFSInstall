@@ -7,9 +7,9 @@ cp freeswitch.service /etc/systemd/system/freeswitch.service
 
 cd /usr/src/
 if [ $master = "y" ]; then
-git clone https://freeswitch.org/stash/scm/fs/freeswitch.git freeswitch
+git clone https://github.com/signalwire/freeswitch.git freeswitch
 else
-git clone https://freeswitch.org/stash/scm/fs/freeswitch.git -bv1.6 freeswitch
+git clone https://github.com/signalwire/freeswitch.git -bv1.10 freeswitch
 fi
 
 cd freeswitch
@@ -20,15 +20,6 @@ git config pull.rebase true
 
 sed -i /usr/src/freeswitch/modules.conf -e s:'#xml_int/mod_xml_radius:xml_int/mod_xml_radius:'
 sed -i /usr/src/freeswitch/modules.conf -e s:'#applications/mod_rad_auth:applications/mod_rad_auth:'
-
-if [ $master = "y" ]; then
-echo ""
-else
-sed -i /usr/src/freeswitch/src/mod/xml_int/mod_xml_radius/Makefile.am -e s:'RADCLIENT_VERSION=1.1.6:RADCLIENT_VERSION=1.1.7:'
-sed -i /usr/src/freeswitch/src/mod/xml_int/mod_xml_radius/Makefile.in -e s:'RADCLIENT_VERSION = 1.1.6:RADCLIENT_VERSION = 1.1.7:'
-sed -i /usr/src/freeswitch/src/mod/applications/mod_rad_auth/Makefile.am -e s:'RADCLIENT_VERSION=1.1.6:RADCLIENT_VERSION=1.1.7:'
-sed -i /usr/src/freeswitch/src/mod/applications/mod_rad_auth/Makefile.in -e s:'RADCLIENT_VERSION = 1.1.6:RADCLIENT_VERSION = 1.1.7:'
-fi
 
 ./configure
 
