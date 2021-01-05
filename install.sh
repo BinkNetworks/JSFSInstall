@@ -45,13 +45,17 @@ sed -i '/cdrom:/d' /etc/apt/sources.list
 
 #Update to latest packages
 verbose "Update installed packages"
-apt-get update && apt-get upgrade -y --force-yes
+apt-get update && apt-get upgrade -y
 
 #Add dependencies
-wget -O - https://files.freeswitch.org/repo/deb/debian/freeswitch_archive_g0.pub | apt-key add -
-echo "deb http://files.freeswitch.org/repo/deb/freeswitch-1.6/ jessie main" > /etc/apt/sources.list.d/freeswitch.list
+apt-get update && apt-get install -yq gnupg2 wget lsb-release
+wget -O - https://files.freeswitch.org/repo/deb/debian-release/fsstretch-archive-keyring.asc | apt-key add -
+ 
+echo "deb http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
+echo "deb-src http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+ 
 apt-get update
-apt-get install -y --force-yes freeswitch-video-deps-most ntp
+apt-get build-dep freeswitch
 
 #Add Execute Permissions to other Scripts
 chmod +x resources/*.sh
