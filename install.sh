@@ -44,7 +44,7 @@ export master
 sed -i '/cdrom:/d' /etc/apt/sources.list
 
 #Update to latest packages
-verbose "Update installed packages"
+echo "Update installed packages"
 apt-get update && apt-get upgrade -y
 
 #Add dependencies
