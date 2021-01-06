@@ -20,6 +20,7 @@ git config pull.rebase true
 
 sed -i /usr/src/freeswitch/modules.conf -e s:'#xml_int/mod_xml_radius:xml_int/mod_xml_radius:'
 sed -i /usr/src/freeswitch/modules.conf -e s:'#applications/mod_rad_auth:applications/mod_rad_auth:'
+cp /usr/src/JSFSInstall/resources/mod_rad_auth.c /usr/src/freeswitch/src/mod/applications/mod_rad_auth/
 
 ./configure
 
