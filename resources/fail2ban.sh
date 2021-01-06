@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 
 #send a message
-verbose "Installing Fail2ban"
+echo "Installing Fail2ban"
 
 #add the dependencies
 apt-get install -y fail2ban
