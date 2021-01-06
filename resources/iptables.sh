@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 
 #send a message
-verbose "Configuring IPTables"
+echo "Configuring IPTables"
 
 #run iptables commands
 iptables -A INPUT -i lo -j ACCEPT
