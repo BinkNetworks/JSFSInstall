@@ -27,6 +27,9 @@ read -p "Enter the password for your Radius Server:" pass
 #Get Redirect Server Address
 read -p "Enter the IP/FQDN of JeraSoft ReDirect Server:" redirect
 
+#Get Freeswitch token from signalwire.com
+read -p "Enter Auth Token from Signalwire.com:" TOKEN
+
 echo "Were about to install FreeSwitch, we can either use?"
 echo "Master FreeSwitch branch, not recommended for production"
 echo "V1.6 which is the current Stable/Production Branch"
@@ -39,6 +42,7 @@ export acct
 export redirect
 export pass
 export master
+export TOKEN
 
 # removes the cd img from the /etc/apt/sources.list file (not needed after base install)
 sed -i '/cdrom:/d' /etc/apt/sources.list
@@ -49,11 +53,12 @@ apt-get update && apt-get upgrade -y
 
 #Add dependencies
 apt-get update && apt-get install -yq gnupg2 wget lsb-release
-wget -O - https://files.freeswitch.org/repo/deb/debian-release/fsstretch-archive-keyring.asc | apt-key add -
  
-echo "deb http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
-echo "deb-src http://files.freeswitch.org/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
- 
+wget --http-user=signalwire --http-password=$TOKEN -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg
+echo "machine freeswitch.signalwire.com login signalwire password $TOKEN" > /etc/apt/auth.conf
+echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" > /etc/apt/sources.list.d/freeswitch.list
+echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ `lsb_release -sc` main" >> /etc/apt/sources.list.d/freeswitch.list
+
 apt-get update
 apt-get build-dep freeswitch
 
