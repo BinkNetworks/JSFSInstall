@@ -69,7 +69,7 @@ chmod +x resources/*.sh
 resources/iptables.sh
 
 #sngrep
-resources/sngrep.sh
+apt-get install -y sngrep
 
 #Freeswitch
 resources/freeswitch.sh
