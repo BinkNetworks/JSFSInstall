@@ -9,7 +9,7 @@ cd /usr/src/
 if [ $master = "y" ]; then
 git clone https://github.com/signalwire/freeswitch.git freeswitch
 else
-git clone https://github.com/signalwire/freeswitch.git -bv1.10 freeswitch
+git clone https://github.com/signalwire/freeswitch.git -bv1.6 freeswitch
 fi
 
 cd freeswitch
